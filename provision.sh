@@ -15,10 +15,12 @@ ruby-build "$(ruby-build --definitions | grep 1.9.3 | tail -1)" /home/vagrant/lo
 echo "Installing dot files"
 git clone https://github.com/gsabev/dotfiles.git
 cp -rf ./dotfiles/.[a-zA-Z0-9]* /home/vagrant
-cp -rf ./dotfiles/git-completion.bash
+cp -rf ./dotfiles/git-completion.bash /home/vagrant
 
-echo "Fixing permissions and ownership"
-chmod 0600 /home/vagrant/.ssh/id_*
+echo "Generating key pair"
+rm -rf ~/.ssh/id_* && ssh-keygen -t rsa -P '' -f '/home/vagrant/.ssh/id_rsa'
+
+echo "Fixing ownership"
 chown -R vagrant:vagrant /home/vagrant
 
 echo "Tuning environment"
@@ -28,3 +30,6 @@ echo 'vagrant  ALL= (ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
 echo "Installing basic gems"
 sudo -iu vagrant gem install pry
 sudo -iu vagrant gem install bundler
+
+echo "Your public key is:"
+cat /home/vagrant/.ssh/id_rsa.pub
