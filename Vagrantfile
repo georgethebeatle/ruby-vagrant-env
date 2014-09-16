@@ -6,6 +6,9 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "precise64.box"
+  
+  config.vm.network "forwarded_port", guest: 4567, host: 4567
+  config.vm.network "forwarded_port", guest: 9292, host: 9292
 
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
@@ -20,7 +23,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "shell", path: "provision.sh"
-
-  config.vm.network "forwarded_port", guest: 4567, host: 4567
-  config.vm.network "forwarded_port", guest: 9292, host: 9292
 end
+
