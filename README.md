@@ -1,4 +1,4 @@
-# Simple vagrant environment to be used from RubyMine IDE
+# Simple vagrant environment for ruby development
 
 ## Prerequisutes
 
@@ -8,7 +8,7 @@
 
         vagrant plugin install vagrant-proxyconf
         
-4. Install RubyMine
+4. Install RubyMine (optional)
 
 
 ## Setup the environment
@@ -22,7 +22,7 @@
         cd ruby-vagrant-env
         vagrant up
         
-## Setup RubyMine to work with our environment
+## Setup RubyMine to work with our environment (optional)
 
 1. Start RubyMine
 2. Open File->Settings
