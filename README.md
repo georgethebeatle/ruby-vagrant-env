@@ -1,4 +1,4 @@
-# Simple vagrant environment
+# Simple vagrant environment for ruby development
 
 ## Prerequisutes
 
