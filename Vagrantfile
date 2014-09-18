@@ -5,7 +5,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "precise64.box"
+  config.vm.box = "hashicorp/precise64"
   
   config.vm.network "forwarded_port", guest: 4567, host: 4567
   config.vm.network "forwarded_port", guest: 9292, host: 9292
@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
-
+  
   if Vagrant.has_plugin?("vagrant-proxyconf")
     config.env_proxy.http = "http://proxy:8080"
     config.env_proxy.https = "https://proxy:8080"
