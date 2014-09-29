@@ -15,7 +15,7 @@
 
 1. Clone this repo
 
-        git clone git@github.wdf.sap.corp:i056003/ruby-vagrant-env.git
+        git clone git@github.com:gsabev/ruby-vagrant-env.git
         
 2. Vagrant Up
 
