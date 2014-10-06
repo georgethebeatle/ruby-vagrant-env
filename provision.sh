@@ -7,6 +7,12 @@ sudo apt-get update
 sudo apt-get install -y make git vim wget unzip
 
 # Clone vim repository and compile vim from spurce with ruby support
+sudo apt-get install -y make git
+
+echo "Cloning vim sources"
+git clone https://github.com/b4winckler/vim.git
+echo "Compiling vim with ruby support"
+(cd vim && ./configure --enable-rubyinterp && make && sudo make install)
 
 echo "Installing ruby-build"
 git clone https://github.com/sstephenson/ruby-build.git

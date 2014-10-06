@@ -15,7 +15,7 @@
 
 1. Clone this repo
 
-        git clone git@github.wdf.sap.corp:i056003/ruby-vagrant-env.git
+        git clone git@github.com:gsabev/ruby-vagrant-env.git
         
 2. Vagrant Up
 
@@ -30,7 +30,7 @@
   1. Chose SFTP for type of connection
   1. SFTP host: 127.0.0.1
   1. Port: 2222
-  1. User/Password: vagrant/bagrant
+  1. User/Password: vagrant/vagrant
   1. Check the remember password checkbox
   1. Click the Autodetect rootpath button
   1. Test the connection - should be green
