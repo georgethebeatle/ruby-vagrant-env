@@ -1,21 +1,33 @@
+RUBY_VERSION=2.1.3
+
 set -e
 
 echo "Installing required packages"
 sudo apt-get update
-sudo apt-get install -y make git vim
+sudo apt-get install -y make git vim wget unzip
+
+# Clone vim repository and compile vim from spurce with ruby support
 
 echo "Installing ruby-build"
 git clone https://github.com/sstephenson/ruby-build.git
 ./ruby-build/install.sh
 
-version=$(ruby-build --definitions | grep 1.9.3 | tail -1)
+version=$(ruby-build --definitions | grep $RUBY_VERSION | tail -1)
 echo "Installing ruby-${version}"
-ruby-build "$(ruby-build --definitions | grep 1.9.3 | tail -1)" /home/vagrant/local/ruby-${version}
+ruby-build "$(ruby-build --definitions | grep $RUBY_VERSION | tail -1)" /home/vagrant/local/ruby-${version}
 
 echo "Installing dot files"
 git clone https://github.com/gsabev/dotfiles.git
 cp -rf ./dotfiles/.[a-zA-Z0-9]* /home/vagrant
 cp -rf ./dotfiles/git-completion.bash /home/vagrant
+# clone Vundle inside .vim/bundle/Vundle.vim directory
+# install plugins from .vimrc by executing 'vim +PluginInstall +qall'
+wget https://github.com/gmarik/Vundle.vim/archive/master.zip
+mkdir -p /home/vagrant/.vim/bundle/Vundle.vim
+unzip master.zip -d /home/vagrant/.vim/bundle/Vundle.vim
+cp -r /home/vagrant/.vim/bundle/Vundle.vim/Vundle.vim-master/* /home/vagrant/.vim/bundle/Vundle.vim
+rm -rf /home/vagrant/.vim/bundle/Vundle.vim/Vundle.vim-master
+vim +PluginInstall +qall
 
 echo "Generating key pair"
 rm -rf ~/.ssh/id_* && ssh-keygen -t rsa -P '' -f '/home/vagrant/.ssh/id_rsa'
