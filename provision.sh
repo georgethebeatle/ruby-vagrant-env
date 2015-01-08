@@ -4,15 +4,16 @@ set -e
 
 echo "Installing required packages"
 sudo apt-get update
-sudo apt-get install -y make git vim wget unzip
-
 # Clone vim repository and compile vim from spurce with ruby support
-sudo apt-get install -y make git
+sudo apt-get install -y make cmake git wget unzip libncurses5-dev libgnome2-dev libgnomeui-dev \
+    libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+    libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
+    ruby-dev mercurial
 
 echo "Cloning vim sources"
 git clone https://github.com/b4winckler/vim.git
 echo "Compiling vim with ruby support"
-(cd vim && ./configure --enable-rubyinterp && make && sudo make install)
+(cd vim && ./configure --with-features=huge --enable-multibyte --enable-rubyinterp --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config --enable-perlinterp --enable-luainterp --enable-gui=gtk2 --enable-cscope --prefix=/usr && make VIMRUNTIMEDIR=/usr/share/vim/vim74 && sudo make install)
 
 echo "Installing ruby-build"
 git clone https://github.com/sstephenson/ruby-build.git
